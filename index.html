@@ -1,1134 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    content="width=device-width, initial-scale=1.0"
   >
 
-  <meta
-    name="description"
-    content="Try products live and shop together with TryOn Live by Kundan."
-  >
-
-  <title>TryOn Live — By Kundan</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet"
-  >
+  <title>TryOn Live — Kundan</title>
 
   <style>
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --background: #f6f6f3;
-      --white: #ffffff;
-      --black: #111111;
-      --grey: #707070;
-      --light-grey: #eeeeeb;
-      --accent: #dfff3f;
-      --border: rgba(0,0,0,0.08);
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       min-height: 100vh;
-      font-family: "DM Sans", sans-serif;
-      background:
-        radial-gradient(
-          circle at 85% 10%,
-          rgba(223,255,63,0.20),
-          transparent 28%
-        ),
-        var(--background);
-      color: var(--black);
-      overflow-x: hidden;
-    }
-
-    button,
-    input {
-      font-family: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .page {
-      width: min(1240px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* =========================
-       NAVBAR
-    ========================= */
-
-    .navbar {
-      height: 82px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      text-decoration: none;
-      color: var(--black);
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
-      background: var(--black);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-    }
-
-    .brand-name {
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-subtitle {
-      font-size: 10px;
-      color: var(--grey);
-      margin-top: 2px;
-    }
-
-    .nav-status {
-      padding: 10px 16px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(15px);
-      color: var(--grey);
-      font-size: 12px;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero {
-      min-height: calc(100vh - 82px);
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 60px;
-      align-items: center;
-      padding: 40px 0 80px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 13px;
-      border-radius: 100px;
-      background: rgba(223,255,63,0.55);
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 25px;
-    }
-
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
+      font-family: Arial, sans-serif;
       background: #111;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: min(900px, 92%);
+      text-align: center;
     }
 
     h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(50px, 7vw, 88px);
-      line-height: 0.95;
-      letter-spacing: -4px;
+      font-size: 42px;
+      margin-bottom: 10px;
     }
 
-    h1 span {
-      color: #888;
+    p {
+      color: #aaa;
+      margin-bottom: 30px;
     }
 
-    .hero-description {
-      max-width: 570px;
-      color: var(--grey);
-      font-size: 17px;
-      line-height: 1.7;
-      margin: 28px 0 34px;
-    }
-
-    /* =========================
-       PRODUCT INPUT
-    ========================= */
-
-    .product-box {
+    input {
+      width: 100%;
       max-width: 650px;
-      padding: 9px;
-      border-radius: 28px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.08);
-    }
-
-    .input-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .product-input {
-      flex: 1;
-      min-width: 0;
-      height: 58px;
+      height: 55px;
+      padding: 0 18px;
+      border-radius: 15px;
       border: none;
       outline: none;
-      background: transparent;
-      padding: 0 18px;
-      font-size: 14px;
-    }
-
-    .product-input::placeholder {
-      color: #999;
-    }
-
-    .primary-button {
-      height: 58px;
-      padding: 0 24px;
-      border: none;
-      border-radius: 19px;
-      background: var(--black);
-      color: white;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
-
-    .primary-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-    }
-
-    .input-note {
-      padding: 9px 17px 2px;
-      color: #999;
-      font-size: 10px;
-    }
-
-    /* =========================
-       HERO VISUAL
-    ========================= */
-
-    .visual {
-      min-height: 590px;
-      display: grid;
-      place-items: center;
-      position: relative;
-    }
-
-    .visual-card {
-      width: min(430px, 90%);
-      aspect-ratio: 0.78;
-      border-radius: 40px;
-      background: white;
-      padding: 14px;
-      box-shadow: 30px 30px 90px rgba(0,0,0,0.10);
-      transform: rotate(2deg);
-    }
-
-    .visual-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 30px;
-      background: #151515;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .visual-glow {
-      width: 260px;
-      height: 260px;
-      position: absolute;
-      right: -80px;
-      top: -80px;
-      background: var(--accent);
-      border-radius: 50%;
-      filter: blur(55px);
-      opacity: 0.65;
-    }
-
-    .live-label {
-      position: absolute;
-      top: 25px;
-      left: 25px;
-      background: rgba(255,255,255,0.9);
-      padding: 9px 13px;
-      border-radius: 100px;
-      font-size: 10px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .live-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff3b30;
-    }
-
-    .fake-person {
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 170px;
-      color: rgba(255,255,255,0.12);
-      font-weight: 700;
-    }
-
-    .fake-product {
-      width: 165px;
-      height: 165px;
-      border-radius: 40px;
-      background: white;
-      position: absolute;
-      top: 35%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-8deg);
-      display: grid;
-      place-items: center;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.30);
-      font-size: 75px;
-    }
-
-    .floating-card {
-      position: absolute;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 14px 17px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.10);
-    }
-
-    .floating-one {
-      left: -10px;
-      bottom: 70px;
-    }
-
-    .floating-two {
-      right: -10px;
-      top: 70px;
-    }
-
-    .floating-title {
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .floating-subtitle {
-      color: var(--grey);
-      font-size: 10px;
-      margin-top: 3px;
-    }
-
-    /* =========================
-       FEATURES
-    ========================= */
-
-    .features {
-      padding: 20px 0 100px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 15px;
-    }
-
-    .feature {
-      padding: 25px;
-      border-radius: 25px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.60);
-    }
-
-    .feature-icon {
-      font-size: 28px;
-      margin-bottom: 18px;
-    }
-
-    .feature-title {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .feature-description {
-      color: var(--grey);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       ROOM
-    ========================= */
-
-    .room-section {
-      padding: 40px 0 110px;
-    }
-
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(38px,5vw,58px);
-      letter-spacing: -2px;
+      font-size: 15px;
       margin-bottom: 12px;
     }
 
-    .section-description {
-      max-width: 560px;
-      color: var(--grey);
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-
-    .room-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .secondary-button {
-      height: 52px;
-      padding: 0 22px;
-      border-radius: 17px;
-      border: 1px solid var(--border);
+    button {
+      height: 55px;
+      padding: 0 30px;
+      border: none;
+      border-radius: 15px;
       background: white;
-      font-weight: 600;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 30px 0 40px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--grey);
-      font-size: 11px;
-    }
-
-    footer strong {
-      color: var(--black);
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translate(-50%,120px);
-      background: #111;
-      color: white;
-      padding: 13px 20px;
-      border-radius: 100px;
-      font-size: 12px;
-      opacity: 0;
-      transition: 0.3s ease;
-      z-index: 20000;
-    }
-
-    .toast.show {
-      transform: translate(-50%,0);
-      opacity: 1;
-    }
-
-    /* =========================
-       CAMERA
-    ========================= */
-
-    #cameraScreen {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: #050505;
-      color: white;
-    }
-
-    .camera-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      max-width: 1300px;
-      margin: auto;
-    }
-
-    .camera-header {
-      height: 75px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 22px;
-      flex-shrink: 0;
-    }
-
-    .camera-brand {
+      color: black;
+      font-weight: bold;
       font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      cursor: pointer;
     }
 
-    .camera-subtitle {
-      color: #888;
-      font-size: 10px;
-      margin-top: 3px;
+    button:hover {
+      transform: translateY(-2px);
     }
 
-    .close-camera {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.08);
-      color: white;
-      font-size: 25px;
-    }
-
-    .camera-stage {
-      flex: 1;
+    #cameraBox {
+      display: none;
+      margin-top: 30px;
       position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 25px;
       overflow: hidden;
-      margin: 0 12px;
-      border-radius: 28px;
-      background: #111;
+      background: #000;
     }
 
-    #liveCamera {
+    video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      display: block;
       transform: scaleX(-1);
     }
 
-    .camera-live {
+    .live {
       position: absolute;
-      top: 18px;
-      left: 18px;
-      padding: 9px 13px;
-      border-radius: 100px;
-      background: rgba(0,0,0,0.65);
-      font-size: 10px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      top: 15px;
+      left: 15px;
+      background: red;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    .camera-live span {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff3b30;
-    }
-
-    .tryon-placeholder {
+    .product {
       position: absolute;
-      top: 40%;
+      top: 35%;
       left: 50%;
-      transform: translate(-50%,-50%);
-      width: 150px;
-      height: 150px;
-      border-radius: 35px;
-      background: rgba(255,255,255,0.90);
-      color: #111;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      background: white;
+      color: black;
+      width: 140px;
+      height: 140px;
+      border-radius: 30px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      align-items: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     }
 
-    .tryon-icon {
-      font-size: 58px;
+    #status {
+      margin-top: 20px;
+      color: #aaa;
     }
 
-    .tryon-text {
-      font-size: 9px;
-      letter-spacing: 2px;
-      font-weight: 700;
-      margin-top: 4px;
-    }
-
-    .camera-message {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.70);
-      padding: 10px 18px;
-      border-radius: 100px;
-      font-size: 11px;
-      white-space: nowrap;
-      backdrop-filter: blur(12px);
-    }
-
-    .camera-controls {
-      height: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 55px;
-      flex-shrink: 0;
-    }
-
-    .camera-button {
-      border: none;
-      background: transparent;
-      color: white;
-      font-size: 21px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .camera-button small {
-      color: #999;
-      font-size: 9px;
-    }
-
-    .camera-main {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 5px solid white;
-      background: transparent;
-      color: white;
-      font-size: 22px;
-    }
-
-    .camera-footer {
-      padding: 0 22px 15px;
-      display: flex;
-      justify-content: space-between;
+    .credit {
+      margin-top: 40px;
+      font-size: 12px;
       color: #666;
-      font-size: 9px;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media(max-width:850px) {
-
-      .page {
-        width: calc(100% - 28px);
-      }
-
-      .nav-status {
-        display: none;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      h1 {
-        letter-spacing: -2.5px;
-      }
-
-      .hero-description {
-        font-size: 15px;
-      }
-
-      .visual {
-        min-height: 460px;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-    @media(max-width:520px) {
-
-      .input-row {
-        flex-direction: column;
-      }
-
-      .product-input {
-        height: 55px;
-      }
-
-      .primary-button {
-        width: 100%;
-      }
-
-      .visual {
-        min-height: 420px;
-      }
-
-      .visual-card {
-        width: 90%;
-      }
-
-      .floating-one {
-        left: 0;
-      }
-
-      .floating-two {
-        right: 0;
-      }
-
-      .camera-controls {
-        gap: 38px;
-      }
-
-      .camera-footer span:last-child {
-        display: none;
-      }
-
     }
 
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="page">
+  <div class="container">
 
-    <!-- NAVIGATION -->
+    <h1>
+      TRYON LIVE
+    </h1>
 
-    <nav class="navbar">
+    <p>
+      Created by Kundan
+    </p>
 
-      <a href="#" class="brand">
+    <input
+      id="productUrl"
+      type="url"
+      placeholder="Paste any product link here"
+    >
 
-        <div class="brand-logo">
-          K
-        </div>
+    <br>
 
-        <div>
-          <div class="brand-name">
-            TRYON LIVE
-          </div>
+    <button onclick="startCamera()">
+      START TRY-ON
+    </button>
 
-          <div class="brand-subtitle">
-            by Kundan
-          </div>
-        </div>
 
-      </a>
+    <div id="status">
+      Camera has not started yet.
+    </div>
 
-      <div class="nav-status">
-        Live virtual shopping experience
+
+    <div id="cameraBox">
+
+      <video
+        id="camera"
+        autoplay
+        playsinline
+        muted
+      ></video>
+
+      <div class="live">
+        ● LIVE
       </div>
 
-    </nav>
-
-
-    <!-- HERO -->
-
-    <main class="hero">
-
-      <section>
-
-        <div class="eyebrow">
-
-          <span class="eyebrow-dot"></span>
-
-          LIVE TRY-ON EXPERIENCE
-
-        </div>
-
-
-        <h1>
-
-          See it.<br>
-
-          <span>Try it.</span><br>
-
-          Shop together.
-
-        </h1>
-
-
-        <p class="hero-description">
-
-          Paste a product link and experience it live.
-          Invite someone else into the room and explore
-          products together in real time.
-
-        </p>
-
-
-        <!-- PRODUCT INPUT -->
-
-        <div class="product-box">
-
-          <div class="input-row">
-
-            <input
-              id="productUrl"
-              class="product-input"
-              type="url"
-              placeholder="Paste a product link here..."
-              autocomplete="off"
-            >
-
-            <button
-              class="primary-button"
-              onclick="startTryOn()"
-            >
-              Start Try-On
-            </button>
-
-          </div>
-
-
-          <div class="input-note">
-
-            Paste a product page URL to begin.
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- VISUAL -->
-
-      <section class="visual">
-
-        <div class="visual-card">
-
-          <div class="visual-screen">
-
-            <div class="visual-glow"></div>
-
-
-            <div class="live-label">
-
-              <span class="live-dot"></span>
-
-              LIVE TRY-ON
-
-            </div>
-
-
-            <div class="fake-person">
-              YOU
-            </div>
-
-
-            <div class="fake-product">
-              🕶️
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="floating-card floating-one">
-
-          <div class="floating-title">
-            👥 2 people connected
-          </div>
-
-          <div class="floating-subtitle">
-            Shopping together
-          </div>
-
-        </div>
-
-
-        <div class="floating-card floating-two">
-
-          <div class="floating-title">
-            ⚡ Live experience
-          </div>
-
-          <div class="floating-subtitle">
-            Real-time try-on
-          </div>
-
-        </div>
-
-      </section>
-
-    </main>
-
-
-    <!-- FEATURES -->
-
-    <section class="features">
-
-      <div class="feature-grid">
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            🕶️
-          </div>
-
-          <div class="feature-title">
-            Try products live
-          </div>
-
-          <div class="feature-description">
-
-            Explore accessories, eyewear, bags
-            and other products through your camera.
-
-          </div>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            👥
-          </div>
-
-          <div class="feature-title">
-            Shop together
-          </div>
-
-          <div class="feature-description">
-
-            Create a room and invite friends or family
-            into the same live shopping experience.
-
-          </div>
-
-        </div>
-
-
-        <div class="feature">
-
-          <div class="feature-icon">
-            ⚡
-          </div>
-
-          <div class="feature-title">
-            Real-time experience
-          </div>
-
-          <div class="feature-description">
-
-            Experience products directly through
-            your browser without installing an app.
-
-          </div>
-
-        </div>
-
+      <div class="product">
+        🕶️
       </div>
 
-    </section>
+    </div>
 
 
-    <!-- ROOM -->
-
-    <section class="room-section">
-
-      <h2 class="section-title">
-        Shopping is better together.
-      </h2>
-
-
-      <p class="section-description">
-
-        Create a private room, share the link and
-        let someone join you while you explore
-        products together.
-
-      </p>
-
-
-      <div class="room-buttons">
-
-        <button
-          class="primary-button"
-          onclick="createRoom()"
-        >
-          + Create a Room
-        </button>
-
-
-        <button
-          class="secondary-button"
-          onclick="joinRoom()"
-        >
-          Join a Room
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-      <div>
-        Concept & Experience by
-        <strong>Kundan</strong>
-      </div>
-
-      <div>
-        Inspired by DailyObjects.com
-      </div>
-
-    </footer>
+    <div class="credit">
+      Concept & Experience by Kundan · Inspired by DailyObjects.com
+    </div>
 
   </div>
 
 
-  <!-- TOAST -->
-
-  <div id="toast" class="toast"></div>
-
-
-  <!-- CAMERA SCREEN WILL BE CREATED HERE -->
-
   <script>
 
-    let cameraStream = null;
+    async function startCamera() {
 
+      const status =
+        document.getElementById("status");
 
-    /* =========================
-       TOAST
-    ========================= */
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById("toast");
-
-      toast.textContent = message;
-
-      toast.classList.add("show");
-
-      setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      }, 3000);
-
-    }
-
-
-    /* =========================
-       START TRY ON
-    ========================= */
-
-    function startTryOn() {
-
-      const input =
-        document.getElementById("productUrl");
-
-      const url =
-        input.value.trim();
-
-
-      if (!url) {
-
-        showToast(
-          "Please paste a product link first."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        new URL(url);
-
-      } catch {
-
-        showToast(
-          "Please enter a valid product URL."
-        );
-
-        return;
-
-      }
-
-
-      localStorage.setItem(
-        "tryon_product_url",
-        url
-      );
-
-
-      openCamera();
-
-    }
-
-
-    /* =========================
-       OPEN CAMERA
-    ========================= */
-
-    async function openCamera() {
-
-      createCameraScreen();
-
+      const cameraBox =
+        document.getElementById("cameraBox");
 
       const video =
-        document.getElementById(
-          "liveCamera"
-        );
+        document.getElementById("camera");
+
+
+      status.innerText =
+        "Requesting camera permission...";
 
 
       try {
 
-        cameraStream =
+        const stream =
           await navigator.mediaDevices.getUserMedia({
 
-            video: {
-              facingMode: "user",
-              width: {
-                ideal: 1280
-              },
-              height: {
-                ideal: 720
-              }
-            },
+            video: true,
 
             audio: false
 
@@ -1136,487 +222,39 @@
 
 
         video.srcObject =
-          cameraStream;
+          stream;
 
 
-        updateCameraMessage(
-          "Camera connected • Try-On ready"
-        );
+        cameraBox.style.display =
+          "block";
 
 
-      } catch(error) {
+        status.innerText =
+          "Camera is working! 🎉";
 
-        console.error(
-          "Camera error:",
-          error
-        );
-
-
-        updateCameraMessage(
-          "Camera permission required"
-        );
-
-
-        showToast(
-          "Please allow camera access."
-        );
 
       }
 
-    }
-
-
-    /* =========================
-       CREATE CAMERA SCREEN
-    ========================= */
-
-    function createCameraScreen() {
-
-      if (
-        document.getElementById(
-          "cameraScreen"
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      const screen =
-        document.createElement("div");
-
-
-      screen.id =
-        "cameraScreen";
-
-
-      screen.innerHTML = `
-
-        <div class="camera-wrapper">
-
-
-          <div class="camera-header">
-
-            <div>
-
-              <div class="camera-brand">
-                TRYON LIVE
-              </div>
-
-              <div class="camera-subtitle">
-                Live Try-On
-              </div>
-
-            </div>
-
-
-            <button
-              class="close-camera"
-              onclick="closeCamera()"
-            >
-              ×
-            </button>
-
-          </div>
-
-
-          <div class="camera-stage">
-
-
-            <video
-              id="liveCamera"
-              autoplay
-              playsinline
-              muted
-            ></video>
-
-
-            <div class="camera-live">
-
-              <span></span>
-
-              LIVE
-
-            </div>
-
-
-            <div class="tryon-placeholder">
-
-              <div class="tryon-icon">
-                🕶️
-              </div>
-
-              <div class="tryon-text">
-                TRY-ON
-              </div>
-
-            </div>
-
-
-            <div
-              id="cameraMessage"
-              class="camera-message"
-            >
-
-              Starting camera...
-
-            </div>
-
-
-          </div>
-
-
-          <div class="camera-controls">
-
-
-            <button
-              class="camera-button"
-              onclick="flipCamera()"
-            >
-
-              🔄
-
-              <small>
-                Flip
-              </small>
-
-            </button>
-
-
-            <button
-              id="cameraMainButton"
-              class="camera-main"
-              onclick="toggleCamera()"
-            >
-              ●
-            </button>
-
-
-            <button
-              class="camera-button"
-              onclick="closeCamera()"
-            >
-
-              ✕
-
-              <small>
-                Close
-              </small>
-
-            </button>
-
-
-          </div>
-
-
-          <div class="camera-footer">
-
-            <span>
-              🔒 Camera stays in your browser
-            </span>
-
-            <span>
-              Concept & Experience by Kundan
-            </span>
-
-          </div>
-
-
-        </div>
-
-      `;
-
-
-      document.body.appendChild(
-        screen
-      );
-
-    }
-
-
-    /* =========================
-       CLOSE CAMERA
-    ========================= */
-
-    function closeCamera() {
-
-      if (cameraStream) {
-
-        cameraStream
-          .getTracks()
-          .forEach(
-            track => track.stop()
-          );
-
-        cameraStream = null;
-
-      }
-
-
-      const screen =
-        document.getElementById(
-          "cameraScreen"
-        );
-
-
-      if (screen) {
-
-        screen.remove();
-
-      }
-
-    }
-
-
-    /* =========================
-       TOGGLE CAMERA
-    ========================= */
-
-    function toggleCamera() {
-
-      if (!cameraStream) {
-
-        openCamera();
-
-        return;
-
-      }
-
-
-      const tracks =
-        cameraStream.getVideoTracks();
-
-
-      if (!tracks.length) {
-
-        return;
-
-      }
-
-
-      const enabled =
-        tracks[0].enabled;
-
-
-      tracks.forEach(
-        track => {
-          track.enabled = !enabled;
-        }
-      );
-
-
-      const button =
-        document.getElementById(
-          "cameraMainButton"
-        );
-
-
-      if (button) {
-
-        button.textContent =
-          enabled ? "○" : "●";
-
-      }
-
-    }
-
-
-    /* =========================
-       FLIP CAMERA
-    ========================= */
-
-    async function flipCamera() {
-
-      if (!cameraStream) {
-
-        return;
-
-      }
-
-
-      const oldTrack =
-        cameraStream.getVideoTracks()[0];
-
-
-      const settings =
-        oldTrack.getSettings();
-
-
-      const currentFacing =
-        settings.facingMode ||
-        "user";
-
-
-      const newFacing =
-        currentFacing === "user"
-          ? "environment"
-          : "user";
-
-
-      cameraStream
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-
-      try {
-
-        cameraStream =
-          await navigator.mediaDevices.getUserMedia({
-
-            video: {
-
-              facingMode: newFacing,
-
-              width: {
-                ideal: 1280
-              },
-
-              height: {
-                ideal: 720
-              }
-
-            },
-
-            audio: false
-
-          });
-
-
-        const video =
-          document.getElementById(
-            "liveCamera"
-          );
-
-
-        video.srcObject =
-          cameraStream;
-
-
-      } catch(error) {
+      catch (error) {
 
         console.error(error);
 
-      }
 
-    }
-
-
-    /* =========================
-       CAMERA MESSAGE
-    ========================= */
-
-    function updateCameraMessage(
-      message
-    ) {
-
-      const element =
-        document.getElementById(
-          "cameraMessage"
-        );
+        status.innerText =
+          "Camera could not be opened.";
 
 
-      if (element) {
-
-        element.textContent =
-          message;
-
-      }
-
-    }
-
-
-    /* =========================
-       CREATE ROOM
-    ========================= */
-
-    function createRoom() {
-
-      const roomId =
-        Math.random()
-          .toString(36)
-          .substring(2,9)
-          .toUpperCase();
-
-
-      const roomUrl =
-        window.location.origin +
-        window.location.pathname +
-        "?room=" +
-        roomId;
-
-
-      if (
-        navigator.clipboard
-      ) {
-
-        navigator.clipboard
-          .writeText(roomUrl)
-          .then(() => {
-
-            showToast(
-              "Room link copied!"
-            );
-
-          })
-          .catch(() => {
-
-            prompt(
-              "Copy this room link:",
-              roomUrl
-            );
-
-          });
-
-      } else {
-
-        prompt(
-          "Copy this room link:",
-          roomUrl
+        alert(
+          "Camera permission was denied or the browser could not access your camera."
         );
 
       }
-
-    }
-
-
-    /* =========================
-       JOIN ROOM
-    ========================= */
-
-    function joinRoom() {
-
-      const roomId =
-        prompt(
-          "Enter the room code:"
-        );
-
-
-      if (!roomId) {
-
-        return;
-
-      }
-
-
-      const cleanRoom =
-        roomId
-          .trim()
-          .toUpperCase();
-
-
-      window.location.href =
-        window.location.pathname +
-        "?room=" +
-        encodeURIComponent(
-          cleanRoom
-        );
 
     }
 
   </script>
 
+
 </body>
+
 </html>
