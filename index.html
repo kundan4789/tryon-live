@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <title>TryOn Live — Created by Kundan</title>
+
+  <meta
+    name="description"
+    content="Try products live, share your experience, and shop together."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f7f5;
+      --card: rgba(255, 255, 255, 0.78);
+      --text: #111111;
+      --muted: #6f6f6f;
+      --line: rgba(0, 0, 0, 0.08);
+      --black: #111111;
+      --white: #ffffff;
+      --accent: #d7ff3f;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      --radius: 28px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "DM Sans", sans-serif;
+      background:
+        radial-gradient(
+          circle at 80% 10%,
+          rgba(215, 255, 63, 0.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 10% 80%,
+          rgba(0, 0, 0, 0.04),
+          transparent 25%
+        ),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      width: min(1240px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--black);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      color: var(--muted);
+      display: block;
+      margin-top: -2px;
+    }
+
+    .nav-pill {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      padding: 10px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: calc(100vh - 82px);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 60px;
+      align-items: center;
+      padding: 45px 0 80px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      background: rgba(215, 255, 63, 0.5);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #111;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 0.96;
+      letter-spacing: -4px;
+      max-width: 700px;
+    }
+
+    h1 span {
+      color: #8a8a8a;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 570px;
+      margin: 27px 0 35px;
+    }
+
+    /* PRODUCT INPUT */
+
+    .product-box {
+      width: 100%;
+      max-width: 650px;
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 9px;
+      box-shadow: var(--shadow);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .url-input {
+      flex: 1;
+      min-width: 0;
+      height: 58px;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 0 18px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .url-input::placeholder {
+      color: #999;
+    }
+
+    .primary-btn {
+      border: none;
+      background: var(--black);
+      color: var(--white);
+      padding: 0 25px;
+      height: 58px;
+      border-radius: 19px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    }
+
+    .hint {
+      padding: 10px 17px 3px;
+      font-size: 11px;
+      color: #999;
+    }
+
+    /* HERO VISUAL */
+
+    .visual {
+      position: relative;
+      min-height: 600px;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-card {
+      width: min(440px, 100%);
+      aspect-ratio: 0.78;
+      border-radius: 40px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.95),
+          rgba(240, 240, 235, 0.9)
+        );
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 30px 30px 90px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      transform: rotate(2deg);
+    }
+
+    .visual-inner {
+      position: absolute;
+      inset: 14px;
+      border-radius: 30px;
+      background: #161616;
+      overflow: hidden;
+    }
+
+    .visual-glow {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: var(--accent);
+      filter: blur(45px);
+      opacity: 0.65;
+      top: -70px;
+      right: -50px;
+    }
+
+    .person-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 180px;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    .tryon-product {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      top: 33%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .tryon-product span {
+      font-size: 75px;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      padding: 9px 13px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #ff3b30;
+      border-radius: 50%;
+    }
+
+    /* FLOATING CARDS */
+
+    .floating-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 14px 17px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
+    }
+
+    .floating-card.one {
+      left: -20px;
+      bottom: 80px;
+    }
+
+    .floating-card.two {
+      right: -25px;
+      top: 80px;
+    }
+
+    .float-title {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .float-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* FEATURES */
+
+    .features {
+      padding: 30px 0 100px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 25px;
+    }
+
+    .feature-icon {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ROOM AREA */
+
+    .room-section {
+      padding: 40px 0 110px;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(35px, 5vw, 55px);
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 550px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .room-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .secondary-btn {
+      height: 52px;
+      padding: 0 22px;
+      border-radius: 17px;
+      background: white;
+      border: 1px solid var(--line);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 30px 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .credit strong {
+      color: var(--text);
+    }
+
+    /* TOAST */
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 100px);
+      background: #111;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      z-index: 100;
+      transition: 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 850px) {
+      .page {
+        width: min(100% - 28px, 600px);
+      }
+
+      .navbar {
+        height: 70px;
+      }
+
+      .nav-pill {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 35px;
+      }
+
+      h1 {
+        letter-spacing: -2.5px;
+      }
+
+      .hero-text {
+        font-size: 15px;
+      }
+
+      .visual {
+        min-height: 480px;
+      }
+
+      .visual-card {
+        width: min(360px, 90%);
+      }
+
+      .floating-card.one {
+        left: 0;
+      }
+
+      .floating-card.two {
+        right: 0;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .input-row {
+        flex-direction: column;
+      }
+
+      .url-input {
+        height: 55px;
+      }
+
+      .primary-btn {
+        width: 100%;
+      }
+
+      .visual {
+        min-height: 420px;
+      }
+
+      .visual-card {
+        border-radius: 30px;
+      }
+
+      .tryon-product {
+        width: 135px;
+        height: 135px;
+      }
+
+      .tryon-product span {
+        font-size: 60px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- NAVIGATION -->
+
+    <nav class="navbar">
+
+      <a href="#" class="brand">
+
+        <div class="brand-mark">K</div>
+
+        <div>
+          <div class="brand-name">TRYON LIVE</div>
+          <span class="brand-sub">by Kundan</span>
+        </div>
+
+      </a>
+
+      <div class="nav-pill">
+        Live virtual shopping experience
+      </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <main class="hero">
+
+      <section>
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          LIVE TRY-ON EXPERIENCE
+        </div>
+
+        <h1>
+          See it.<br />
+          <span>Try it.</span><br />
+          Shop together.
+        </h1>
+
+        <p class="hero-text">
+          Paste a product link and experience it live.
+          Invite someone else into the room and see products
+          together in real time.
+        </p>
+
+
+        <!-- PRODUCT URL -->
+
+        <div class="product-box">
+
+          <div class="input-row">
+
+            <input
+              id="productUrl"
+              class="url-input"
+              type="url"
+              placeholder="Paste a product link here..."
+              autocomplete="off"
+            />
+
+            <button
+              class="primary-btn"
+              onclick="startTryOn()"
+            >
+              Start Try-On
+            </button>
+
+          </div>
+
+          <div class="hint">
+            Works best with product pages containing clear product images.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- VISUAL -->
+
+      <section class="visual">
+
+        <div class="visual-card">
+
+          <div class="visual-inner">
+
+            <div class="visual-glow"></div>
+
+            <div class="live-badge">
+              <span class="live-dot"></span>
+              LIVE TRY-ON
+            </div>
+
+            <div class="person-placeholder">
+              YOU
+            </div>
+
+            <div class="tryon-product">
+              <span>🕶️</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="floating-card one">
+
+          <div class="float-title">
+            👥 2 people connected
+          </div>
+
+          <div class="float-sub">
+            Shopping together
+          </div>
+
+        </div>
+
+
+        <div class="floating-card two">
+
+          <div class="float-title">
+            ✨ Live experience
+          </div>
+
+          <div class="float-sub">
+            Real-time try-on
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- FEATURES -->
+
+    <section class="features">
+
+      <div class="feature-grid">
+
+        <div class="feature">
+
+          <div class="feature-icon">🕶️</div>
+
+          <h3>
+            Try products live
+          </h3>
+
+          <p>
+            Explore accessories, eyewear, bags and other products
+            directly through your camera.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">👥</div>
+
+          <h3>
+            Shop together
+          </h3>
+
+          <p>
+            Create a room and invite friends or family to join
+            the same live shopping experience.
+          </p>
+
+        </div>
+
+
+        <div class="feature">
+
+          <div class="feature-icon">⚡</div>
+
+          <h3>
+            Real-time experience
+          </h3>
+
+          <p>
+            Built around browser-based technology so the experience
+            can work without installing an app.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ROOM -->
+
+    <section class="room-section">
+
+      <h2 class="section-title">
+        Shopping is better together.
+      </h2>
+
+      <p class="section-subtitle">
+        Create a private room, share the link and let someone
+        join you while you explore products together.
+      </p>
+
+      <div class="room-actions">
+
+        <button
+          class="primary-btn"
+          onclick="createRoom()"
+        >
+          + Create a Room
+        </button>
+
+        <button
+          class="secondary-btn"
+          onclick="joinRoom()"
+        >
+          Join a Room
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      <div class="credit">
+        Concept & Experience by <strong>Kundan</strong>
+      </div>
+
+      <div>
+        Inspired by DailyObjects.com
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div id="toast" class="toast"></div>
+
+
+  <script>
+
+    function showToast(message) {
+
+      const toast = document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+
+    }
+
+
+    function startTryOn() {
+
+      const url =
+        document.getElementById("productUrl").value.trim();
+
+      if (!url) {
+
+        showToast("Please paste a product link first.");
+
+        return;
+      }
+
+      try {
+
+        new URL(url);
+
+      } catch {
+
+        showToast("Please enter a valid product URL.");
+
+        return;
+      }
+
+      localStorage.setItem("tryon_product_url", url);
+
+      showToast(
+        "Product received. Try-On engine is coming next."
+      );
+
+    }
+
+
+    function createRoom() {
+
+      const roomId =
+        Math.random()
+          .toString(36)
+          .substring(2, 9)
+          .toUpperCase();
+
+      const roomUrl =
+        window.location.origin +
+        window.location.pathname +
+        "?room=" +
+        roomId;
+
+      navigator.clipboard
+        .writeText(roomUrl)
+        .then(() => {
+
+          showToast(
+            "Room created & link copied!"
+          );
+
+        })
+        .catch(() => {
+
+          showToast(
+            "Room created: " + roomId
+          );
+
+        });
+
+    }
+
+
+    function joinRoom() {
+
+      const roomId =
+        prompt("Enter the room code:");
+
+      if (!roomId) return;
+
+      const cleanRoom =
+        roomId.trim().toUpperCase();
+
+      window.location.href =
+        window.location.pathname +
+        "?room=" +
+        encodeURIComponent(cleanRoom);
+
+    }
+
+  </script>
+
+</body>
+</html>
