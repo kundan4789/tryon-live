@@ -1,2069 +1,354 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>TryOn Live — Kundan</title>
+  <title>TRYON LIVE — Virtual Try-On</title>
 
   <meta
     name="description"
-    content="Live virtual try-on experience by Kundan"
-  >
+    content="TRYON LIVE — Experience products before you buy."
+  />
 
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-      font-family: Arial, sans-serif;
-      background: #080808;
-      color: white;
-    }
-
-
-    body {
-      overflow-x: hidden;
-    }
-
-
-    /* ==========================
-       HOME
-    ========================== */
-
-    .home {
-
-      min-height: 100vh;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 30px;
-
-      background:
-        radial-gradient(
-          circle at 80% 10%,
-          rgba(210,255,60,0.14),
-          transparent 30%
-        ),
-        #f6f6f3;
-
-      color: #111;
-
-    }
-
-
-    .home-card {
-
-      width: 100%;
-
-      max-width: 900px;
-
-      text-align: center;
-
-    }
-
-
-    .logo {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      margin-bottom: 25px;
-
-    }
-
-
-    .logo-box {
-
-      width: 42px;
-
-      height: 42px;
-
-      background: #111;
-
-      color: white;
-
-      border-radius: 13px;
-
-      display: grid;
-
-      place-items: center;
-
-      font-weight: bold;
-
-    }
-
-
-    .logo-text {
-
-      font-weight: bold;
-
-      text-align: left;
-
-    }
-
-
-    .logo-sub {
-
-      display: block;
-
-      color: #777;
-
-      font-size: 10px;
-
-      margin-top: 2px;
-
-    }
-
-
-    h1 {
-
-      font-family: Georgia, serif;
-
-      font-size: clamp(
-        48px,
-        8vw,
-        90px
-      );
-
-      line-height: 0.95;
-
-      letter-spacing: -4px;
-
-      margin: 0;
-
-    }
-
-
-    h1 span {
-
-      color: #888;
-
-    }
-
-
-    .description {
-
-      max-width: 580px;
-
-      margin: 25px auto 35px;
-
-      color: #666;
-
-      line-height: 1.7;
-
-      font-size: 16px;
-
-    }
-
-
-    .product-box {
-
-      max-width: 650px;
-
-      margin: auto;
-
-      padding: 8px;
-
-      background: white;
-
-      border-radius: 22px;
-
-      box-shadow:
-        0 20px 60px
-        rgba(0,0,0,0.08);
-
-      border: 1px solid #eee;
-
-    }
-
-
-    .product-input {
-
-      width: 100%;
-
-      height: 55px;
-
-      border: none;
-
-      outline: none;
-
-      padding: 0 16px;
-
-      font-size: 14px;
-
-      border-radius: 15px;
-
-    }
-
-
-    .start-button {
-
-      width: 100%;
-
-      height: 55px;
-
-      border: none;
-
-      border-radius: 16px;
-
-      background: #111;
-
-      color: white;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-      margin-top: 8px;
-
-      font-size: 15px;
-
-    }
-
-
-    .start-button:hover {
-
-      transform: translateY(-2px);
-
-    }
-
-
-    .note {
-
-      color: #999;
-
-      font-size: 11px;
-
-      margin-top: 12px;
-
-    }
-
-
-    .credit {
-
-      margin-top: 45px;
-
-      color: #999;
-
-      font-size: 11px;
-
-    }
-
-
-    /* ==========================
-       TRY ON SCREEN
-    ========================== */
-
-    #tryonScreen {
-
-      display: none;
-
-      position: fixed;
-
-      inset: 0;
-
-      background: #050505;
-
-      z-index: 9999;
-
-    }
-
-
-    .tryon-wrapper {
-
-      width: 100%;
-
-      height: 100%;
-
-      display: flex;
-
-      flex-direction: column;
-
-    }
-
-
-    .topbar {
-
-      height: 70px;
-
-      flex-shrink: 0;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      padding: 0 20px;
-
-      background: rgba(
-        0,
-        0,
-        0,
-        0.85
-      );
-
-    }
-
-
-    .tryon-brand {
-
-      font-weight: bold;
-
-      letter-spacing: 1px;
-
-      font-size: 14px;
-
-    }
-
-
-    .tryon-status {
-
-      color: #aaa;
-
-      font-size: 10px;
-
-      margin-top: 3px;
-
-    }
-
-
-    .close-button {
-
-      width: 40px;
-
-      height: 40px;
-
-      border-radius: 50%;
-
-      border: 1px solid #333;
-
-      background: #1c1c1c;
-
-      color: white;
-
-      font-size: 22px;
-
-      cursor: pointer;
-
-    }
-
-
-    /* ==========================
-       CAMERA
-    ========================== */
-
-    .camera-area {
-
-      flex: 1;
-
-      position: relative;
-
-      overflow: hidden;
-
-      margin: 10px;
-
-      border-radius: 25px;
-
-      background: #111;
-
-    }
-
-
-    #video {
-
-      position: absolute;
-
-      width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
-
-      transform: scaleX(-1);
-
-    }
-
-
-    #overlay {
-
-      position: absolute;
-
-      width: 100%;
-
-      height: 100%;
-
-      left: 0;
-
-      top: 0;
-
-      transform: scaleX(-1);
-
-      pointer-events: none;
-
-    }
-
-
-    .live-badge {
-
-      position: absolute;
-
-      top: 18px;
-
-      left: 18px;
-
-      background: rgba(
-        0,
-        0,
-        0,
-        0.65
-      );
-
-      padding: 9px 13px;
-
-      border-radius: 100px;
-
-      font-size: 10px;
-
-      font-weight: bold;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-      z-index: 5;
-
-    }
-
-
-    .live-dot {
-
-      width: 7px;
-
-      height: 7px;
-
-      background: red;
-
-      border-radius: 50%;
-
-    }
-
-
-    .face-status {
-
-      position: absolute;
-
-      bottom: 18px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      background: rgba(
-        0,
-        0,
-        0,
-        0.65
-      );
-
-      padding: 10px 16px;
-
-      border-radius: 100px;
-
-      font-size: 11px;
-
-      color: #ddd;
-
-      z-index: 5;
-
-      white-space: nowrap;
-
-    }
-
-
-    /* ==========================
-       CONTROLS
-    ========================== */
-
-    .controls {
-
-      height: 90px;
-
-      flex-shrink: 0;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 35px;
-
-    }
-
-
-    .control {
-
-      background: transparent;
-
-      border: none;
-
-      color: white;
-
-      cursor: pointer;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      gap: 4px;
-
-      font-size: 20px;
-
-    }
-
-
-    .control small {
-
-      color: #888;
-
-      font-size: 9px;
-
-    }
-
-
-    /* ==========================
-       LOADING
-    ========================== */
-
-    .loading {
-
-      position: absolute;
-
-      inset: 0;
-
-      background: rgba(
-        0,
-        0,
-        0,
-        0.80
-      );
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: center;
-
-      align-items: center;
-
-      z-index: 10;
-
-      text-align: center;
-
-      padding: 30px;
-
-    }
-
-
-    .loading-spinner {
-
-      width: 45px;
-
-      height: 45px;
-
-      border: 4px solid #333;
-
-      border-top-color: white;
-
-      border-radius: 50%;
-
-      animation:
-        spin 1s linear infinite;
-
-      margin-bottom: 20px;
-
-    }
-
-
-    @keyframes spin {
-
-      to {
-
-        transform:
-          rotate(360deg);
-
-      }
-
-    }
-
-
-    .loading-text {
-
-      font-weight: bold;
-
-      font-size: 15px;
-
-    }
-
-
-    .loading-sub {
-
-      color: #999;
-
-      font-size: 11px;
-
-      margin-top: 7px;
-
-    }
-
-
-    /* ==========================
-       MOBILE
-    ========================== */
-
-    @media(max-width:600px) {
-
-      .home {
-
-        padding: 20px;
-
-      }
-
-
-      h1 {
-
-        letter-spacing: -2px;
-
-      }
-
-
-      .description {
-
-        font-size: 14px;
-
-      }
-
-
-      .camera-area {
-
-        margin: 5px;
-
-        border-radius: 18px;
-
-      }
-
-
-      .topbar {
-
-        padding:
-          0 14px;
-
-      }
-
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 
 <body>
 
+  <div class="app-shell">
 
-  <!-- ==========================
-       HOME
-  ========================== -->
+    <!-- HEADER -->
+    <header class="topbar">
 
-
-  <main
-    id="home"
-    class="home"
-  >
-
-    <div class="home-card">
-
-
-      <div class="logo">
-
-        <div class="logo-box">
-          K
-        </div>
+      <div class="brand">
+        <div class="brand-mark">TL</div>
 
         <div>
+          <div class="brand-name">TRYON LIVE</div>
+          <div class="brand-subtitle">Virtual shopping, reimagined.</div>
+        </div>
+      </div>
 
-          <div class="logo-text">
-            TRYON LIVE
-          </div>
+      <div class="header-status">
+        <span class="status-dot"></span>
+        <span id="systemStatus">Ready</span>
+      </div>
 
-          <span class="logo-sub">
-            by Kundan
-          </span>
+    </header>
 
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-copy">
+
+        <div class="eyebrow">
+          LIVE VIRTUAL TRY-ON
+        </div>
+
+        <h1>
+          See it.
+          <span>Wear it.</span>
+          Move in it.
+        </h1>
+
+        <p>
+          Paste a product link and experience it live through your camera.
+          TRYON LIVE tracks your movement and positions the product around you.
+        </p>
+
+      </div>
+
+
+      <!-- PRODUCT INPUT -->
+      <div class="product-card">
+
+        <div class="card-label">
+          PRODUCT URL
+        </div>
+
+        <div class="url-row">
+
+          <input
+            id="productUrl"
+            type="url"
+            value="https://www2.hm.com/en_in/productpage.1362738003.html"
+            placeholder="Paste product URL here..."
+            autocomplete="off"
+          />
+
+          <button id="loadProductBtn">
+            Load Product
+          </button>
+
+        </div>
+
+        <div class="input-help">
+          Try the H&M overshirt already loaded above.
         </div>
 
       </div>
 
-
-      <h1>
-
-        See it.<br>
-
-        <span>Try it.</span><br>
-
-        Live.
-
-      </h1>
+    </section>
 
 
-      <p class="description">
+    <!-- PRODUCT PREVIEW -->
+    <section class="product-section">
 
-        Experience products through your camera
-        and see how they look on you in real time.
-
-      </p>
-
-
-      <div class="product-box">
-
-
-        <input
-          id="productUrl"
-          class="product-input"
-          type="url"
-          placeholder="Paste your product link here..."
-        >
-
-
-        <button
-          class="start-button"
-          onclick="startTryOn()"
-        >
-
-          START LIVE TRY-ON
-
-        </button>
-
-
-      </div>
-
-
-      <div class="note">
-
-        First live experience: AI-powered sunglasses try-on.
-
-      </div>
-
-
-      <div class="credit">
-
-        Concept & Experience by Kundan
-        · Inspired by DailyObjects.com
-
-      </div>
-
-
-    </div>
-
-  </main>
-
-
-
-  <!-- ==========================
-       TRY ON SCREEN
-  ========================== -->
-
-
-  <section
-    id="tryonScreen"
-  >
-
-
-    <div class="tryon-wrapper">
-
-
-      <header class="topbar">
-
+      <div class="section-heading">
 
         <div>
+          <div class="eyebrow">SELECTED PRODUCT</div>
+          <h2 id="productTitle">Product not loaded</h2>
+        </div>
 
-          <div class="tryon-brand">
-            TRYON LIVE
-          </div>
+        <div class="product-meta">
+          <span id="productPrice">—</span>
+        </div>
 
-          <div class="tryon-status">
-            AI Face Tracking
+      </div>
+
+
+      <div class="product-preview-card">
+
+        <div class="product-image-area">
+
+          <img
+            id="productImage"
+            alt="Selected product"
+          />
+
+          <div
+            id="imagePlaceholder"
+            class="image-placeholder"
+          >
+            <div class="placeholder-icon">◌</div>
+            <div>Paste a product URL to begin</div>
           </div>
 
         </div>
 
 
+        <div class="product-information">
+
+          <div class="product-category">
+            PRODUCT
+          </div>
+
+          <h3 id="productName">
+            Your selected product will appear here
+          </h3>
+
+          <p id="productDescription">
+            Product information will be loaded automatically.
+          </p>
+
+
+          <div class="product-actions">
+
+            <button
+              id="startTryOnBtn"
+              class="primary-button"
+              disabled
+            >
+              <span>Start Try-On</span>
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRY ON -->
+    <section
+      id="tryonSection"
+      class="tryon-section hidden"
+    >
+
+      <div class="tryon-header">
+
+        <div>
+          <div class="eyebrow">LIVE EXPERIENCE</div>
+
+          <h2>
+            You're in the fitting room.
+          </h2>
+        </div>
+
         <button
-          class="close-button"
-          onclick="closeTryOn()"
+          id="closeTryOnBtn"
+          class="secondary-button"
         >
-          ×
+          Exit
         </button>
 
+      </div>
 
-      </header>
 
-
-      <div class="camera-area">
-
+      <div class="camera-container">
 
         <video
-          id="video"
+          id="cameraVideo"
           autoplay
           playsinline
           muted
         ></video>
 
-
         <canvas
-          id="overlay"
+          id="tryonCanvas"
         ></canvas>
 
 
-        <div class="live-badge">
-
-          <span class="live-dot"></span>
-
-          LIVE TRY-ON
-
+        <div
+          id="cameraMessage"
+          class="camera-message"
+        >
+          <div class="loader"></div>
+          <span>Starting camera…</span>
         </div>
 
 
-        <div
-          id="faceStatus"
-          class="face-status"
-        >
+        <div class="camera-topbar">
 
-          Starting camera...
-
-        </div>
-
-
-        <div
-          id="loading"
-          class="loading"
-        >
-
-          <div class="loading-spinner"></div>
-
-          <div class="loading-text">
-            Preparing your live try-on
+          <div class="live-pill">
+            <span></span>
+            LIVE
           </div>
 
-          <div class="loading-sub">
-            Loading AI face tracking...
+          <div
+            id="trackingStatus"
+            class="tracking-pill"
+          >
+            Body tracking: waiting
           </div>
 
         </div>
 
 
-      </div>
+        <div class="camera-bottom">
+
+          <div class="camera-product">
+
+            <img
+              id="miniProductImage"
+              alt=""
+            />
+
+            <div>
+              <small>TRYING</small>
+              <strong id="miniProductName">
+                Product
+              </strong>
+            </div>
+
+          </div>
 
 
-      <div class="controls">
+          <button
+            id="flipCameraBtn"
+            class="camera-control"
+          >
+            ↻
+          </button>
 
-
-        <button
-          class="control"
-          onclick="switchCamera()"
-        >
-
-          🔄
-
-          <small>
-            Flip camera
-          </small>
-
-        </button>
-
-
-        <button
-          class="control"
-          onclick="toggleGlasses()"
-        >
-
-          🕶️
-
-          <small>
-            Try glasses
-          </small>
-
-        </button>
-
-
-        <button
-          class="control"
-          onclick="closeTryOn()"
-        >
-
-          ✕
-
-          <small>
-            Close
-          </small>
-
-        </button>
-
+        </div>
 
       </div>
 
 
-    </div>
+      <div class="tryon-info">
 
+        <div class="info-item">
+          <strong>01</strong>
+          <span>Stand 1–2 metres from the camera.</span>
+        </div>
 
-  </section>
+        <div class="info-item">
+          <strong>02</strong>
+          <span>Keep your shoulders visible.</span>
+        </div>
 
+        <div class="info-item">
+          <strong>03</strong>
+          <span>Move naturally and watch the product follow you.</span>
+        </div>
 
+      </div>
 
-  <!-- ==========================
-       MEDIAPIPE
-  ========================== -->
 
+      <div class="experience-note">
 
-  <script type="module">
+        <span>ⓘ</span>
 
+        <p>
+          TRYON LIVE is currently using live body tracking with a
+          2D product-overlay experience. Advanced photorealistic
+          garment simulation will be added in a future version.
+        </p>
 
-    /*
-      Google MediaPipe Face Landmarker
+      </div>
 
-      This runs directly inside the browser.
-      No paid API is being used.
-    */
+    </section>
 
 
-    let FaceLandmarker;
+    <!-- FEATURES -->
+    <section class="features">
 
-    let FilesetResolver;
+      <div class="feature">
+        <div class="feature-number">01</div>
+        <h3>Real-time tracking</h3>
+        <p>
+          Your body movement controls the live product positioning.
+        </p>
+      </div>
 
-    let faceLandmarker = null;
+      <div class="feature">
+        <div class="feature-number">02</div>
+        <h3>Any product URL</h3>
+        <p>
+          The architecture is designed around product links rather
+          than a fixed catalogue.
+        </p>
+      </div>
 
-    let cameraStream = null;
+      <div class="feature">
+        <div class="feature-number">03</div>
+        <h3>Built for shopping</h3>
+        <p>
+          The experience can later support rooms, sharing and
+          multiple shoppers.
+        </p>
+      </div>
 
-    let animationFrame = null;
+    </section>
 
-    let glassesEnabled = true;
 
-    let currentFacingMode =
-      "user";
+    <!-- FOOTER -->
+    <footer>
 
+      <div>
+        TRYON LIVE
+      </div>
 
-    /* ==========================
-       LOAD MEDIAPIPE
-    ========================== */
+      <div class="credits">
+        Concept & Experience by Kundan
+        <span>·</span>
+        Inspired by DailyObjects.com
+      </div>
 
+    </footer>
 
-    async function loadMediaPipe() {
+  </div>
 
-      try {
 
-
-        const module =
-          await import(
-            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21"
-          );
-
-
-        FaceLandmarker =
-          module.FaceLandmarker;
-
-
-        FilesetResolver =
-          module.FilesetResolver;
-
-
-        const vision =
-          await FilesetResolver.forVisionTasks(
-
-            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.21/wasm"
-
-          );
-
-
-        faceLandmarker =
-          await FaceLandmarker.createFromOptions(
-
-            vision,
-
-            {
-
-              baseOptions: {
-
-                modelAssetPath:
-
-                  "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task"
-
-              },
-
-
-              runningMode:
-                "VIDEO",
-
-
-              numFaces: 1,
-
-
-              minFaceDetectionConfidence:
-                0.5,
-
-
-              minFacePresenceConfidence:
-                0.5,
-
-
-              minTrackingConfidence:
-                0.5
-
-            }
-
-          );
-
-
-        return true;
-
-
-      }
-
-      catch(error) {
-
-
-        console.error(
-          "MediaPipe error:",
-          error
-        );
-
-
-        return false;
-
-      }
-
-    }
-
-
-
-    /* ==========================
-       START TRY ON
-    ========================== */
-
-
-    async function startTryOn() {
-
-
-      const url =
-        document
-          .getElementById(
-            "productUrl"
-          )
-          .value
-          .trim();
-
-
-      if (!url) {
-
-        alert(
-          "Please paste a product link first."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        new URL(url);
-
-      }
-
-      catch {
-
-        alert(
-          "Please enter a valid product URL."
-        );
-
-        return;
-
-      }
-
-
-      document
-        .getElementById(
-          "home"
-        )
-        .style.display =
-          "none";
-
-
-      document
-        .getElementById(
-          "tryonScreen"
-        )
-        .style.display =
-          "block";
-
-
-      document
-        .getElementById(
-          "loading"
-        )
-        .style.display =
-          "flex";
-
-
-      document
-        .getElementById(
-          "faceStatus"
-        )
-        .textContent =
-          "Requesting camera...";
-
-
-      try {
-
-
-        cameraStream =
-          await navigator.mediaDevices
-            .getUserMedia({
-
-              video: {
-
-                facingMode:
-                  currentFacingMode,
-
-                width: {
-                  ideal: 1280
-                },
-
-                height: {
-                  ideal: 720
-                }
-
-              },
-
-              audio: false
-
-            });
-
-
-        const video =
-          document.getElementById(
-            "video"
-          );
-
-
-        video.srcObject =
-          cameraStream;
-
-
-        await video.play();
-
-
-        resizeCanvas();
-
-
-        document
-          .getElementById(
-            "faceStatus"
-          )
-          .textContent =
-          "Loading AI face tracking...";
-
-
-        const loaded =
-          await loadMediaPipe();
-
-
-        if (!loaded) {
-
-
-          document
-            .getElementById(
-              "loading"
-            )
-            .innerHTML = `
-
-              <div
-                style="
-                  font-size:40px;
-                  margin-bottom:15px;
-                "
-              >
-                ⚠️
-              </div>
-
-              <div
-                class="loading-text"
-              >
-                AI could not load
-              </div>
-
-              <div
-                class="loading-sub"
-              >
-                Please refresh the page and try again.
-              </div>
-
-            `;
-
-
-          return;
-
-        }
-
-
-        document
-          .getElementById(
-            "loading"
-          )
-          .style.display =
-          "none";
-
-
-        document
-          .getElementById(
-            "faceStatus"
-          )
-          .textContent =
-          "Look at the camera";
-
-
-        detectFace();
-
-
-      }
-
-      catch(error) {
-
-
-        console.error(error);
-
-
-        document
-          .getElementById(
-            "loading"
-          )
-          .innerHTML = `
-
-            <div
-              style="
-                font-size:40px;
-                margin-bottom:15px;
-              "
-            >
-              📷
-            </div>
-
-            <div
-              class="loading-text"
-            >
-              Camera could not start
-            </div>
-
-            <div
-              class="loading-sub"
-            >
-              Please check your browser camera permission.
-            </div>
-
-          `;
-
-      }
-
-    }
-
-
-
-    /* ==========================
-       FACE DETECTION LOOP
-    ========================== */
-
-
-    function detectFace() {
-
-
-      const video =
-        document.getElementById(
-          "video"
-        );
-
-
-      const canvas =
-        document.getElementById(
-          "overlay"
-        );
-
-
-      const ctx =
-        canvas.getContext(
-          "2d"
-        );
-
-
-      if (
-        video.readyState <
-        2
-      ) {
-
-        animationFrame =
-          requestAnimationFrame(
-            detectFace
-          );
-
-        return;
-
-      }
-
-
-      try {
-
-
-        const result =
-          faceLandmarker.detectForVideo(
-
-            video,
-
-            performance.now()
-
-          );
-
-
-        ctx.clearRect(
-
-          0,
-
-          0,
-
-          canvas.width,
-
-          canvas.height
-
-        );
-
-
-        if (
-          result.faceLandmarks &&
-          result.faceLandmarks.length
-        ) {
-
-
-          const landmarks =
-            result.faceLandmarks[0];
-
-
-          drawGlasses(
-            ctx,
-            landmarks,
-            canvas.width,
-            canvas.height
-          );
-
-
-          document
-            .getElementById(
-              "faceStatus"
-            )
-            .textContent =
-            "✓ Face detected • Live try-on";
-
-
-        }
-
-        else {
-
-
-          document
-            .getElementById(
-              "faceStatus"
-            )
-            .textContent =
-            "Move your face into view";
-
-
-        }
-
-      }
-
-      catch(error) {
-
-        console.error(error);
-
-      }
-
-
-      animationFrame =
-        requestAnimationFrame(
-          detectFace
-        );
-
-    }
-
-
-
-    /* ==========================
-       DRAW GLASSES
-    ========================== */
-
-
-    function drawGlasses(
-      ctx,
-      landmarks,
-      width,
-      height
-    ) {
-
-
-      if (!glassesEnabled) {
-
-        return;
-
-      }
-
-
-      /*
-        MediaPipe face landmarks:
-
-        33  = left eye outer area
-        263 = right eye outer area
-      */
-
-
-      const left =
-        landmarks[33];
-
-
-      const right =
-        landmarks[263];
-
-
-      if (
-        !left ||
-        !right
-      ) {
-
-        return;
-
-      }
-
-
-      const x1 =
-        left.x * width;
-
-
-      const y1 =
-        left.y * height;
-
-
-      const x2 =
-        right.x * width;
-
-
-      const y2 =
-        right.y * height;
-
-
-      const centerX =
-        (x1 + x2) / 2;
-
-
-      const centerY =
-        (y1 + y2) / 2;
-
-
-      const eyeDistance =
-        Math.sqrt(
-
-          Math.pow(
-            x2 - x1,
-            2
-          )
-
-          +
-
-          Math.pow(
-            y2 - y1,
-            2
-          )
-
-        );
-
-
-      const glassesWidth =
-        eyeDistance * 2.45;
-
-
-      const glassesHeight =
-        glassesWidth * 0.38;
-
-
-      const angle =
-        Math.atan2(
-
-          y2 - y1,
-
-          x2 - x1
-
-        );
-
-
-      ctx.save();
-
-
-      ctx.translate(
-        centerX,
-        centerY
-      );
-
-
-      ctx.rotate(
-        angle
-      );
-
-
-      /*
-        LEFT FRAME
-      */
-
-
-      ctx.fillStyle =
-        "rgba(10,10,10,0.94)";
-
-
-      ctx.strokeStyle =
-        "#777";
-
-
-      ctx.lineWidth =
-        Math.max(
-          2,
-          glassesWidth * 0.015
-        );
-
-
-      const lensWidth =
-        glassesWidth * 0.38;
-
-
-      const lensHeight =
-        glassesHeight * 0.80;
-
-
-      const gap =
-        glassesWidth * 0.05;
-
-
-      const leftLensX =
-        -(lensWidth + gap / 2);
-
-
-      const rightLensX =
-        gap / 2;
-
-
-      /*
-        Left lens
-      */
-
-
-      roundedRect(
-
-        ctx,
-
-        leftLensX,
-
-        -lensHeight / 2,
-
-        lensWidth,
-
-        lensHeight,
-
-        lensHeight * 0.22
-
-      );
-
-
-      ctx.fill();
-
-      ctx.stroke();
-
-
-      /*
-        Right lens
-      */
-
-
-      roundedRect(
-
-        ctx,
-
-        rightLensX,
-
-        -lensHeight / 2,
-
-        lensWidth,
-
-        lensHeight,
-
-        lensHeight * 0.22
-
-      );
-
-
-      ctx.fill();
-
-      ctx.stroke();
-
-
-      /*
-        Bridge
-      */
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        -gap / 2,
-        -lensHeight * 0.12
-      );
-
-
-      ctx.lineTo(
-        gap / 2,
-        -lensHeight * 0.12
-      );
-
-
-      ctx.stroke();
-
-
-      /*
-        Left temple
-      */
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        leftLensX,
-        -lensHeight * 0.18
-      );
-
-
-      ctx.lineTo(
-        leftLensX -
-        glassesWidth * 0.20,
-
-        -lensHeight * 0.05
-      );
-
-
-      ctx.stroke();
-
-
-      /*
-        Right temple
-      */
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        rightLensX + lensWidth,
-        -lensHeight * 0.18
-      );
-
-
-      ctx.lineTo(
-        rightLensX +
-        lensWidth +
-        glassesWidth * 0.20,
-
-        -lensHeight * 0.05
-      );
-
-
-      ctx.stroke();
-
-
-      /*
-        subtle shine
-      */
-
-
-      ctx.fillStyle =
-        "rgba(255,255,255,0.15)";
-
-
-      roundedRect(
-
-        ctx,
-
-        leftLensX +
-        lensWidth * 0.12,
-
-        -lensHeight * 0.28,
-
-        lensWidth * 0.25,
-
-        lensHeight * 0.10,
-
-        5
-
-      );
-
-
-      ctx.fill();
-
-
-      ctx.restore();
-
-    }
-
-
-
-    /* ==========================
-       ROUNDED RECT
-    ========================== */
-
-
-    function roundedRect(
-      ctx,
-      x,
-      y,
-      width,
-      height,
-      radius
-    ) {
-
-
-      ctx.beginPath();
-
-
-      ctx.moveTo(
-        x + radius,
-        y
-      );
-
-
-      ctx.lineTo(
-        x + width - radius,
-        y
-      );
-
-
-      ctx.quadraticCurveTo(
-
-        x + width,
-        y,
-
-        x + width,
-        y + radius
-
-      );
-
-
-      ctx.lineTo(
-
-        x + width,
-        y + height - radius
-
-      );
-
-
-      ctx.quadraticCurveTo(
-
-        x + width,
-        y + height,
-
-        x + width - radius,
-        y + height
-
-      );
-
-
-      ctx.lineTo(
-
-        x + radius,
-        y + height
-
-      );
-
-
-      ctx.quadraticCurveTo(
-
-        x,
-        y + height,
-
-        x,
-        y + height - radius
-
-      );
-
-
-      ctx.lineTo(
-        x,
-        y + radius
-      );
-
-
-      ctx.quadraticCurveTo(
-
-        x,
-        y,
-
-        x + radius,
-        y
-
-      );
-
-
-      ctx.closePath();
-
-    }
-
-
-
-    /* ==========================
-       CANVAS SIZE
-    ========================== */
-
-
-    function resizeCanvas() {
-
-
-      const video =
-        document.getElementById(
-          "video"
-        );
-
-
-      const canvas =
-        document.getElementById(
-          "overlay"
-        );
-
-
-      canvas.width =
-        video.videoWidth;
-
-
-      canvas.height =
-        video.videoHeight;
-
-    }
-
-
-
-    window.addEventListener(
-
-      "resize",
-
-      resizeCanvas
-
-    );
-
-
-
-    /* ==========================
-       TOGGLE GLASSES
-    ========================== */
-
-
-    function toggleGlasses() {
-
-      glassesEnabled =
-        !glassesEnabled;
-
-    }
-
-
-
-    /* ==========================
-       SWITCH CAMERA
-    ========================== */
-
-
-    async function switchCamera() {
-
-
-      if (!cameraStream) {
-
-        return;
-
-      }
-
-
-      cameraStream
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-
-      currentFacingMode =
-        currentFacingMode === "user"
-          ? "environment"
-          : "user";
-
-
-      try {
-
-
-        cameraStream =
-          await navigator.mediaDevices
-            .getUserMedia({
-
-              video: {
-
-                facingMode:
-                  currentFacingMode,
-
-                width: {
-                  ideal: 1280
-                },
-
-                height: {
-                  ideal: 720
-                }
-
-              },
-
-              audio: false
-
-            });
-
-
-        const video =
-          document.getElementById(
-            "video"
-          );
-
-
-        video.srcObject =
-          cameraStream;
-
-
-        await video.play();
-
-
-        resizeCanvas();
-
-
-      }
-
-      catch(error) {
-
-        console.error(error);
-
-      }
-
-    }
-
-
-
-    /* ==========================
-       CLOSE
-    ========================== */
-
-
-    function closeTryOn() {
-
-
-      if (animationFrame) {
-
-        cancelAnimationFrame(
-          animationFrame
-        );
-
-      }
-
-
-      if (cameraStream) {
-
-        cameraStream
-          .getTracks()
-          .forEach(
-            track => track.stop()
-          );
-
-        cameraStream =
-          null;
-
-      }
-
-
-      document
-        .getElementById(
-          "tryonScreen"
-        )
-        .style.display =
-        "none";
-
-
-      document
-        .getElementById(
-          "home"
-        )
-        .style.display =
-        "flex";
-
-
-      if (faceLandmarker) {
-
-        try {
-
-          faceLandmarker.close();
-
-        }
-
-        catch(error) {
-
-          console.log(error);
-
-        }
-
-        faceLandmarker =
-          null;
-
-      }
-
-    }
-
-
-  </script>
-
+  <!-- MAIN APPLICATION -->
+  <script type="module" src="app.js"></script>
 
 </body>
-
 </html>
