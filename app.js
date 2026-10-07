@@ -29,7 +29,7 @@ const API_BASE =
 ---------------------------------------------------------
 */
 
-const API_BASE = "PASTE-YOUR-CLOUDFLARE-WORKER-URL-HERE";
+const API_BASE = "https://tryon-product-api.kundan-singh-a50.workers.dev/";
 
 
 const DEFAULT_PRODUCT =
